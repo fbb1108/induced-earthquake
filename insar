@@ -1,0 +1,19 @@
+dem.py -a stitch -b 28 30 104 107 -r -s 1 -c
+
+stackSentinel.py -s ./SLC/ -d ./dem/demLat_N28_N30_Lon_E104_E107.dem.wgs84 -a ./aux/ -o ./orbits/ -b '29 29.4 105.1 105.6' -e 0.6 -m 20190221 -C geometry -c all 
+
+./run_files/run_01_unpack_topo_reference       
+./run_files/run_02_unpack_secondary_slc        
+./run_files/run_03_average_baseline            
+./run_files/run_04_fullBurst_geo2rdr           
+./run_files/run_05_fullBurst_resample          
+./run_files/run_06_extract_stack_valid_region
+./run_files/run_07_merge_reference_secondary_slc
+./run_files/run_08_generate_burst_igram
+./run_files/run_09_merge_burst_igram
+./run_files/run_10_filter_coherence
+./run_11_unwrap
+
+prep_isce.py -f "./merged/interferograms/*/filt_*.unw" -m ./reference/IW1.xml -b ./baselines/ -g ./merged/geom_reference/
+
+smallbaselineApp.py  setParm.txt
