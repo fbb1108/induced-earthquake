@@ -17,3 +17,7 @@ stackSentinel.py -s ./SLC/ -d ./dem/demLat_N28_N30_Lon_E104_E107.dem.wgs84 -a ./
 prep_isce.py -f "./merged/interferograms/*/filt_*.unw" -m ./reference/IW1.xml -b ./baselines/ -g ./merged/geom_reference/
 
 smallbaselineApp.py  setParm.txt
+
+
+h5转grd
+save_gmt.py geo_velocity.h5 -o ...
